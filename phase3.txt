@@ -1,0 +1,14 @@
+SQL statements can be found in the following files:
+
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/IncidentDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/LoginDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/ReleaseRepairBeanDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/ReportDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/ResourceDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/ResourceSearchDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/dao/ResourceStatusDAO.java
+6400Fall16Team036/src/main/java/com/gatech/cs6400/jsf/beans/ResourceSearchBean.java
+
+Brag features:
+- Resources that have exceeded their orginally scheduled end dates (deployed resources, resource requests, and resource repairs) are highlighted as red to denote that those recourses are overdue.
+- Created page for returning repaired items back to an "Available" status as it wasn't addressed in the specification.

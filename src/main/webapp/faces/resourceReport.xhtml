@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Resource Report</title>
+</h:head>
+<h:body>
+    <p>Resource Report by Primary Emergency Support Function</p>
+    <p:dataTable var="esf" value="#{reportBean.allESF}">
+        <p:column headerText="ID">
+            <h:outputText value="#{esf.esfID}" />
+        </p:column>
+        <p:column headerText="Primary Emergency Support Function">
+            <h:outputText value="#{esf.esfDescription}" />
+        </p:column>
+        <p:column headerText="Total Resources">
+            <h:outputText value="#{esf.totalResources}" />
+        </p:column>
+        <p:column headerText="Resources in Use">
+            <h:outputText value="#{esf.resourcesInUse}" />
+        </p:column>
+    </p:dataTable>
+    <p:button value="Cancel" outcome="emrsMenu" />
+</h:body>
+</html>

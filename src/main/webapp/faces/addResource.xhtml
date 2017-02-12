@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Add New Resource</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputText value="#{resourceBean.errorMessage}" rendered="#{resourceBean.displayError}" style="font-weight: bold; color: red; font-size: larger" />
+        <p>New Resource Info</p>
+        <p:panelGrid columns="2">
+            <f:facet name="header">
+            </f:facet>
+            <h:outputText value="ResourceID" />
+            <h:outputText value="#{resourceBean.id}" />
+
+            <h:outputText value="Owner" />
+            <h:outputText value="#{login.user}" />
+
+            <h:outputText value="Resource Name" />
+            <h:inputText value="#{resourceBean.resourceName}" />
+
+            <h:outputText value="Primary ESF" />
+            <p:selectOneMenu id="selectPrimaryESF" value="#{resourceBean.primaryESF}"
+                             valueChangeListener="#{resourceBean.primaryESFChange}">
+                <f:selectItems value="#{resourceBean.allESF}" />
+                <p:ajax update="selectSecondaryESF"/>
+            </p:selectOneMenu>
+
+            <h:outputText  value="Additional ESFs"  />
+            <p:selectManyMenu id="selectSecondaryESF" value="#{resourceBean.additionalESF}"
+                              style="width: 600px" size="3">
+                <f:selectItems value="#{resourceBean.secondaryESFList}" />
+                <p:ajax/>
+            </p:selectManyMenu>
+
+            <h:outputText value="Model" />
+            <h:inputText value="#{resourceBean.model}" />
+
+            <h:outputText value="Capabilities" />
+            <p:panelGrid columns="2">
+                <p:dataList id="capList" value="#{resourceBean.capabilities}" var="row">
+                    <h:outputText value="#{row}" />
+                </p:dataList>
+                <h:panelGroup />
+
+                <h:inputText value="#{resourceBean.newCapability}" />
+                <p:commandButton action="#{resourceBean.addCapability}"
+                                 value="Add" process="@form" update="capList"/>
+
+            </p:panelGrid>
+
+
+            <h:outputText value="Home Location" />
+            <p:panelGrid columns="2">
+                <h:outputText value="Lat" />
+                <h:outputText value="Long" />
+
+                <h:inputText value="#{resourceBean.latitude}" />
+                <h:inputText value="#{resourceBean.longitude}" />
+            </p:panelGrid>
+
+            <h:outputText value="Cost" />
+            <h:panelGrid columns="4">
+                <h:outputLabel>$</h:outputLabel>
+                <h:inputText value="#{resourceBean.cost}" />
+                <h:outputLabel>per</h:outputLabel>
+                <p:selectOneMenu value="#{resourceBean.unit}"
+                                  style="width: 600px" size="3">
+                    <f:selectItems value="#{resourceBean.allUnit}" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+        </p:panelGrid>
+        <p:button value="Cancel" outcome="emrsMenu" />
+        <p:commandButton action="#{resourceBean.saveResource}"
+                         value="Save" update="@form"/>
+    </h:form>
+</h:body>
+</html>

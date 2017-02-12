@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Search Resources</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputText id="errorMessage" value="#{resourceSearchBean.errorMessage}" rendered="#{resourceSearchBean.displayError}" style="font-weight: bold; color: red; font-size: larger" />
+        <h3>Search Resource</h3>
+        <p:panelGrid columns="2">
+            <p:outputLabel value="Keyword" />
+            <p:inputText id="keywordInput" value="#{resourceSearchBean.keyword}" />
+
+            <p:outputLabel value="ESF" />
+            <p:selectOneMenu value="#{resourceSearchBean.primaryESF}">
+                <f:selectItems value="#{resourceSearchBean.allSearchESF}" />
+            </p:selectOneMenu>
+
+            <p:outputLabel value="Location" />
+            <p:panelGrid columns="3">
+                <p:outputLabel for="locationInput" value="Within " />
+                <p:inputText id="locationInput" value="#{resourceSearchBean.location}" />
+                <p:outputLabel for="locationInput" value="Kilometers of incident " />
+            </p:panelGrid>
+
+
+            <p:outputLabel value="Incident" />
+            <p:selectOneMenu value="#{resourceSearchBean.incident}">
+                <f:selectItems value="#{resourceSearchBean.ownerIncidentSearch}" />
+            </p:selectOneMenu>
+        </p:panelGrid>
+        <p:button value="Cancel" outcome="emrsMenu" />
+        <p:commandButton value="Search"  action="#{resourceSearchBean.getButtonResults}" update="errorMessage"/>
+    </h:form>
+</h:body>
+</html>

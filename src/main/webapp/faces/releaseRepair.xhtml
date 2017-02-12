@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Title</title>
+    <h:form>
+        <p>Release Repair</p>
+        <p:dataTable id="tableRepairsScheduled" var="repairsScheduled" value="#{releaseRepairBean.inRepair}">
+            <p:column headerText="Id">
+                <h:outputText value="#{repairsScheduled.resourceID}" />
+            </p:column>
+            <p:column headerText="Resource">
+                <h:outputText value="#{repairsScheduled.resourceDescription}" />
+            </p:column>
+            <p:column headerText="Start on">
+                <h:outputText value="#{repairsScheduled.startDate}" />
+            </p:column>
+            <p:column headerText="Ready by">
+                <h:outputText value="#{repairsScheduled.endDate}" style="background-color :  #{repairsScheduled.pastDue ? 'white' : 'red'};"/>
+            </p:column>
+            <p:column headerText="Action">
+                <p:commandButton value="Return" action="#{repairsScheduled.returnResource}" update="tableRepairsScheduled"/>
+            </p:column>
+        </p:dataTable>
+        <p:commandButton value="Cancel" action="emrsMenu"/>
+    </h:form>
+</h:head>
+<body>
+
+</body>
+</html>

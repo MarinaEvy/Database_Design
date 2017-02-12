@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Resource Status</title>
+</h:head>
+<h:body>
+    <h:form id = "mainFormStatus">
+        <p>Resource Status</p>
+        <p>Resources in use</p>
+        <p:dataTable id="tableInUse" var="inUse" value="#{resourceStatusBean.resourceInUse}">
+            <p:column headerText="Id">
+                <h:outputText value="#{inUse.id}" />
+            </p:column>
+            <p:column headerText="Resource Name">
+                <h:outputText value="#{inUse.resourceName}" />
+            </p:column>
+            <p:column headerText="Incident">
+                <h:outputText value="#{inUse.incident}" />
+            </p:column>
+            <p:column headerText="Owner">
+                <h:outputText value="#{inUse.owner}" />
+            </p:column>
+            <p:column headerText="Start Date">
+                <h:outputText value="#{inUse.startDate}" />
+            </p:column>
+            <p:column headerText="Return Date">
+                <h:outputText value="#{inUse.endDate}" style="background-color :  #{inUse.pastDue ? 'white' : 'red'};"/>
+            </p:column>
+            <p:column headerText="Action">
+                <p:commandButton value="Return" action ="#{inUse.returnResource}" update="mainFormStatus"/>
+
+            </p:column>
+        </p:dataTable>
+        <p>Resources Requested by me</p>
+        <p:dataTable id="tableByMe" var="requestByMe" value="#{resourceStatusBean.resourceRequestedByMe}">
+            <p:column headerText="Id">
+                <h:outputText value="#{requestByMe.id}" />
+            </p:column>
+            <p:column headerText="Resource Name">
+                <h:outputText value="#{requestByMe.resourceName}" />
+            </p:column>
+            <p:column headerText="Incident">
+                <h:outputText value="#{requestByMe.incident}" />
+            </p:column>
+            <p:column headerText="Owner">
+                <h:outputText value="#{requestByMe.owner}" />
+            </p:column>
+            <p:column headerText="Return by">
+                <h:outputText value="#{requestByMe.endDate}" style="background-color :  #{requestByMe.pastDue ? 'white' : 'red'};" />
+            </p:column>
+            <p:column headerText="Action">
+                <p:commandButton value="Cancel" action="#{requestByMe.cancelRequest}" update="tableByMe"/>
+            </p:column>
+        </p:dataTable>
+        <p>Resources Requests received by me</p>
+        <p:dataTable id="tableForMe" var="requestForMe" value="#{resourceStatusBean.resourcesRequestedForMe}">
+            <p:column headerText="Id">
+                <h:outputText value="#{requestForMe.id}" />
+            </p:column>
+            <p:column headerText="Resource Name">
+                <h:outputText value="#{requestForMe.resourceName}" />
+            </p:column>
+            <p:column headerText="Incident">
+                <h:outputText value="#{requestForMe.incident}" />
+            </p:column>
+            <p:column headerText="Requested By">
+                <h:outputText value="#{requestForMe.requester}" />
+            </p:column>
+            <p:column headerText="Return by">
+                <h:outputText value="#{requestForMe.returnDate}" />
+            </p:column>
+            <p:column headerText="Action">
+                <p:commandButton value="Deploy" action="#{requestForMe.deployRequest}" update="tableForMe" rendered="#{requestForMe.alreadyDeployed}"/>
+                <p:commandButton value="Reject" action="#{requestForMe.rejectRequest}" update="tableForMe"/>
+            </p:column>
+        </p:dataTable>
+        <p>Repairs Scheduled/In-progress</p>
+        <p:dataTable id="tableRepairsScheduled" var="repairsScheduled" value="#{resourceStatusBean.repairsScheduled}">
+            <p:column headerText="Id">
+                <h:outputText value="#{repairsScheduled.id}" />
+            </p:column>
+            <p:column headerText="Resource">
+                <h:outputText value="#{repairsScheduled.resourceName}" />
+            </p:column>
+            <p:column headerText="Start on">
+                <h:outputText value="#{repairsScheduled.startDate}" />
+            </p:column>
+            <p:column headerText="Ready by">
+                <h:outputText value="#{repairsScheduled.endDate}" style="background-color :  #{repairsScheduled.pastDue ? 'white' : 'red'};"/>
+            </p:column>
+            <p:column headerText="Action">
+                <p:commandButton value="Cancel" rendered="#{repairsScheduled.inRepair}" action="#{repairsScheduled.cancelRepair}" update="tableRepairsScheduled"/>
+            </p:column>
+        </p:dataTable>
+        <p:commandButton value="Cancel" action="emrsMenu"/>
+    </h:form>
+</h:body>
+</html>

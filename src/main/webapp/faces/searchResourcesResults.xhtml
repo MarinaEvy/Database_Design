@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Search Resources</title>
+</h:head>
+<h:body>
+    <h:form>
+            <p:panelGrid id="searchResultsMain" columns="1" >
+
+                <p:panelGrid id="incidentPanelOutput" columns="2" rendered="#{resourceSearchBean.incidentEnabled}">
+                    <h:outputText value="Search Results for Incident:" />
+                    <h:outputText value="#{resourceSearchBean.incident}" />
+                </p:panelGrid>
+
+                <p:dataTable id="searchResultsDataTable" var="results" value="#{resourceSearchBean.searchResults}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{results.id}" />
+                    </p:column>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{results.description}" />
+                    </p:column>
+                    <p:column headerText="Owner">
+                        <h:outputText value="#{results.owner}" />
+                    </p:column>
+                    <p:column headerText="Cost">
+                        <h:outputText value="#{results.cost}" />
+                    </p:column>
+                    <p:column headerText="Status">
+                        <h:outputText value="#{results.status}" />
+                    </p:column>
+                    <p:column headerText="Next Available">
+                        <h:outputText value="#{results.available}" />
+                    </p:column>
+                    <p:column headerText="Distance" rendered="#{resourceSearchBean.incidentEnabled}">
+                        <h:outputText value="#{results.distance}" />
+                    </p:column>
+                    <p:column headerText="Action" rendered="#{resourceSearchBean.incidentEnabled}">
+                        <p:commandButton value="Request" rendered="#{results.requestEnabled}" action="#{results.getButtonRequestAction}" />
+                        <p:commandButton value="Deploy" rendered="#{results.deployEnabled}" action="#{results.getButtonDeployAction}"/>
+                        <p:commandButton value="Repair" rendered="#{results.repairEnabled}" action="#{results.getButtonRepairAction}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:button value="Cancel" outcome="emrsMenu" />
+            </p:panelGrid>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>login</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p>Welcome #{login.user}</p>
+        <h:outputText value="#{login.detail1}" style="font-weight:bold" />
+        <h:outputText value="&#160;" />  <!-- enters space -->
+        <h:outputText value="#{login.detail2}" style="font-weight:bold" /><br/>
+        <h:outputLink value="addResource.xhtml">Add Resource</h:outputLink><br/>
+        <h:outputLink value="addEmergencyIncident.xhtml">Add Emergency Incident</h:outputLink><br/>
+        <h:outputLink value="searchResources.xhtml">Search Resources</h:outputLink><br/>
+        <h:outputLink value="resourceStatus.xhtml">Resource Status</h:outputLink><br/>
+        <h:outputLink value="resourceReport.xhtml">Resource Report</h:outputLink><br/>
+        <h:outputLink value="releaseRepair.xhtml">Close Repaired Resources</h:outputLink><br/>
+        <h:commandLink action="#{login.logout}" value="Exit"></h:commandLink>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,37 @@
+group 'com.gatech.CS6400'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = '1.5'
+targetCompatibility = '1.7'
+
+def springVersion = '4.0.2.RELEASE'
+def jsfApi = '2.2.8'
+def primefaces = '6.0'
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repo.spring.io/libs-snapshot"
+        }
+    maven { url "http://repository.primefaces.org" }
+}
+dependencies {
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.40'//compile group: 'org.icefaces', name: 'icefaces', version: '4.1.1'
+    //compile group: 'org.icefaces', name: 'icefaces-ace', version: '4.1.1'
+    compile "com.sun.faces:jsf-api:$jsfApi"
+    compile "com.sun.faces:jsf-impl:$jsfApi"
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile 'org.apache.commons:commons-lang3:3.2.1'
+    compile 'javax.inject:javax.inject:1'
+    compile "org.primefaces:primefaces:$primefaces"
+    compile "org.primefaces.themes:bootstrap:1.0.10"
+
+
+}

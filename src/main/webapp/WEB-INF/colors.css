@@ -1,0 +1,15 @@
+.SUCCESS{
+    background-color : green !important;
+}
+
+.OVERDUE{
+    background-color: red !important;
+}
+
+.ALMOST_DUE{
+    background-color: yellow !important;
+}
+
+.DEFAULT{
+    background-color: white !important;
+}
